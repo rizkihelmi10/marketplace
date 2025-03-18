@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <nav>
-        <Link to="/">Marketplace</Link> | <Link to="/cart">Cart</Link>
+        <Link to="/">Marketplace</Link> | <Link to="/cart">🛒 Cart</Link>
       </nav>
       <Routes>
         <Route path="/" element={<Marketplace />}></Route>
