@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 
 const MarketplacePage = () => {
     const { username, products, setProducts, cart, addToCart } = useStore();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
@@ -81,7 +81,8 @@ const MarketplacePage = () => {
                     >
                         <span role="img" aria-label="eyes">👀</span>
                         View Cart
-                    </button>                </div>
+                    </button>                
+                    </div>
             </div>
             <div className="products" style={{
                 display: 'grid',

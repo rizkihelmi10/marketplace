@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { use } from 'react';
 import { useStore } from '../store/useStore';
 import logo from '../assets/log.png';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
     const logout = useStore(state => state.logout);
     const isLoggedIn = useStore(state => state.isLoggedIn);
+    const navigate = useNavigate();
   return (
     <header className="header" style={{ 
       backgroundColor: '#EE4D2D', 
@@ -47,6 +49,7 @@ function Navbar() {
               onClick={() => {
                 logout();
                 alert('Logged out');
+                navigate('/')
               }}
               style={{
                 backgroundColor: '#fff',

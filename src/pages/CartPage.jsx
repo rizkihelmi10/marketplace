@@ -1,4 +1,4 @@
-import useStore from "../stores/useStore";
+import {useStore} from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
@@ -8,39 +8,62 @@ const CartPage = () => {
     const cartSet = new Set(cart);
 
     return (
-        <>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="cart-container">
+            <header className="cart-header">
                 <h2>Halaman Keranjang Belanja (logged in as @{username})</h2>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <h2>&#128188; Keranjang Belanja : {cart.length}</h2>
-                    <button onClick={() => navigate('/marketplace')} style={{ padding: '8px' }}>&#128269; KEMBALI KE MARKETPLACE</button>
-                    <button onClick={() => navigate('/checkout')} style={{ padding: '8px' }}>&#128176; <strong>CHECKOUT</strong></button>
+                <div className="cart-actions">
+                    <h2 className="cart-count">💼 Keranjang Belanja : {cart.length}</h2>
+                    <button 
+                        className="btn btn-secondary"
+                        onClick={() => navigate('/marketplace')}
+                    >
+                        🔍 KEMBALI KE MARKETPLACE
+                    </button>
+                    <button 
+                        className="btn btn-primary"
+                        onClick={() => navigate('/checkout')}
+                    >
+                        💰 <strong>CHECKOUT</strong>
+                    </button>
                 </div>
-            </div>
-            <div className="products">
+            </header>
+            <div className="products-grid">
                 {Array.from(cartSet).map(productId => {
                     const product = products.find(product => product.id === productId);
                     const itemCount = cart.filter(id => id === productId).length;
                     return (
-                        <div className="productCard" key={product.id}>
-                            <div>
-                                <img src={product.image} />
-                                <p><strong>${product.price}</strong></p>
-                                <p>{product.title}</p>
+                        <div className="product-card" key={product.id}>
+                            <div className="product-info">
+                                <img src={product.image} alt={product.title} className="product-image" />
+                                <p className="product-price"><strong>${product.price}</strong></p>
+                                <p className="product-title">{product.title}</p>
                             </div>
-                            <div className="actionButton">
-                                <p><span className="stars">★ </span>{product.rating.rate} | {product.rating.count} ratings</p>
-                                <span>
-                                    <button onClick={() => removeFromCart(product.id)}>-</button>
-                                    &nbsp;&nbsp;&nbsp;Jumlah : {itemCount}&nbsp;&nbsp;&nbsp;
-                                    <button onClick={() => addToCart(product.id)}>+</button>
-                                </span>
+                            <div className="product-actions">
+                                <p className="product-rating">
+                                    <span className="stars">★ </span>
+                                    {product.rating.rate} | {product.rating.count} ratings
+                                </p>
+                                <div className="quantity-controls">
+                                    <button 
+                                        className="btn btn-quantity"
+                                        onClick={() => removeFromCart(product.id)}
+                                    >
+                                        -
+                                    </button>
+                                    <span className="quantity-display">Jumlah : {itemCount}</span>
+                                    <button 
+                                        className="btn btn-quantity"
+                                        onClick={() => addToCart(product.id)}
+                                    >
+                                        +
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )
                 })}
             </div>
-        </>
+        </div>
     )
 }
 
