@@ -1,73 +1,119 @@
-import React, { use } from 'react';
-import { useStore } from '../store/useStore';
-import logo from '../assets/log.png';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useStore } from "../store/useStore";
+import logo from "../assets/log.png";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-    const logout = useStore(state => state.logout);
-    const isLoggedIn = useStore(state => state.isLoggedIn);
-    const navigate = useNavigate();
+  const logout = useStore((state) => state.logout);
+  const isLoggedIn = useStore((state) => state.isLoggedIn);
+  const navigate = useNavigate();
+
   return (
-    <header className="header" style={{ 
-      backgroundColor: '#EE4D2D', 
-      padding: '0px 0',
-      height: '100px',
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 1000
-    }}>
-      <nav className="navbar" style={{ 
-        maxWidth: '1000px', 
-        margin: '0 auto', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        padding: '0 2rem'
-      }}>
-        <div className="logo">
-          <img src={logo} alt="Logo" style={{ height: '50px', marginLeft: '-130px' }} />
+    <header style={styles.header}>
+      <nav style={styles.navbar}>
+        {/* ✅ Logo Section */}
+        <div style={styles.logoContainer}>
+          <img src={logo} alt="Logo" style={styles.logo} />
         </div>
-        <ul className="nav-links" style={{ 
-          listStyle: 'none', 
-          display: 'flex', 
-          gap: '2rem', 
-          marginRight: '40px',
-          justifyContent: 'center',
-          marginBottom: '60px',
-          top: '50%',
-          padding: 0 
-        }}>
-          <li><a href="/" style={{ color: '#fff', textDecoration: 'none' }}>Home</a></li>
-          <li><a href="/about" style={{ color: '#fff', textDecoration: 'none' }}>About</a></li>
-          <li><a href="/services" style={{ color: '#fff', textDecoration: 'none' }}>Services</a></li>
-          <li><a href="/contact" style={{ color: '#fff', textDecoration: 'none' }}>Contact</a></li>
+
+        {/* ✅ Navigation Links */}
+        <ul style={styles.navLinks}>
+          <li>
+            <a href="/" style={styles.navLink}>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/about" style={styles.navLink}>
+              About
+            </a>
+          </li>
+          <li>
+            <a href="/services" style={styles.navLink}>
+              Services
+            </a>
+          </li>
+          <li>
+            <a href="/contact" style={styles.navLink}>
+              Contact
+            </a>
+          </li>
         </ul>
+
+        {/* ✅ Logout Button */}
+        {isLoggedIn && (
+          <button
+            onClick={() => {
+              logout();
+              alert("Logged out");
+              navigate("/");
+            }}
+            style={styles.logoutButton}
+          >
+            Logout
+          </button>
+        )}
       </nav>
-      <button 
-              onClick={() => {
-                logout();
-                alert('Logged out');
-                navigate('/')
-              }}
-              style={{
-                backgroundColor: '#fff',
-                color: '#EE4D2D',
-                border: 'none',
-                padding: '0.5rem 1rem',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                position: 'absolute',
-                right: '2rem',
-                top: '50%',
-                transform: 'translateY(-50%)'
-              }}
-            >
-              Logout
-            </button>
-      
     </header>
-  )
+  );
 }
+
 export default Navbar;
+
+// ✅ **Styles Object**
+const styles = {
+  header: {
+    backgroundColor: "#EE4D2D",
+    padding: "0px 0",
+    height: "80px",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+  },
+  navbar: {
+    maxWidth: "1200px",
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0 20px",
+  },
+  logoContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  logo: {
+    height: "50px",
+  },
+  navLinks: {
+    listStyle: "none",
+    display: "flex",
+    gap: "20px",
+    padding: 0,
+    margin: 0,
+  },
+  navLink: {
+    color: "#fff",
+    textDecoration: "none",
+    fontSize: "16px",
+    fontWeight: "500",
+    transition: "color 0.3s ease",
+  },
+  logoutButton: {
+    backgroundColor: "#fff",
+    color: "#EE4D2D",
+    border: "none",
+    padding: "10px 20px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "bold",
+    transition: "background 0.3s ease, transform 0.2s ease",
+  },
+};
