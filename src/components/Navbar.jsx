@@ -27,13 +27,13 @@ function Navbar() {
         padding: '0 2rem'
       }}>
         <div className="logo">
-          <img src={logo} alt="Logo" style={{ height: '50px', marginLeft: '-250px' }} />
+          <img src={logo} alt="Logo" style={{ height: '50px', marginLeft: '-130px' }} />
         </div>
         <ul className="nav-links" style={{ 
           listStyle: 'none', 
           display: 'flex', 
           gap: '2rem', 
-          marginRight: '0px',
+          marginRight: '40px',
           justifyContent: 'center',
           marginBottom: '60px',
           top: '50%',
