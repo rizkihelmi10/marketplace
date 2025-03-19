@@ -13,6 +13,7 @@ const CartPage = () => {
         <h2>🛒 Keranjang Belanja (logged in as @{username})</h2>
         <div style={styles.cartActions}>
           <h2 style={styles.cartCount}>💼 Items in Cart: {cart.length}</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', paddingLeft:'50px' }}>
           <button
             style={styles.secondaryButton}
             onClick={() => navigate("/marketplace")}
@@ -25,6 +26,7 @@ const CartPage = () => {
           >
             💰 <strong>Checkout</strong>
           </button>
+          </div>
         </div>
       </header>
 

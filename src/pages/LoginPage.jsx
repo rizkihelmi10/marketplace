@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useStore } from "../store/useStore";
 import biglog from "../assets/biglog.png";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -16,7 +17,11 @@ function LoginPage() {
     e.preventDefault();
     if (username === "halo" && password === "halo") {
       if (login(username, password)) {
-        alert("Login successful!");
+        Swal.fire({
+            title: "Login Success!",
+            text: "Welcome to Shop EH",
+            icon: "success"
+          });
         navigate("/marketplace");
         console.log(username, password, usernamelog, isLoggedIn);
       }
